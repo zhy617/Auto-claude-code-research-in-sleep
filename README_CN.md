@@ -24,6 +24,7 @@
 
 - **2026-03-15** — ![NEW](https://img.shields.io/badge/NEW-red?style=flat-square) 🔀 **自带模型！** [任意 OpenAI 兼容 API](#-替代模型组合) 均可作为审查器，通过 [`llm-chat`](mcp-servers/llm-chat/) MCP 服务器。GLM、MiniMax、Kimi、LongCat、DeepSeek 已全部测试——**完全不需要 Claude 或 OpenAI API**
 - **2026-03-15** — ![NEW](https://img.shields.io/badge/NEW-red?style=flat-square) 🐾 **[OpenClaw 适配指南](docs/OPENCLAW_ADAPTATION.md)** — 无需 Claude Code slash skills，在 [OpenClaw](https://github.com/All-Hands-AI/OpenHands) 中使用 ARIS 科研工作流
+- **2026-03-15** — ![NEW](https://img.shields.io/badge/NEW-red?style=flat-square) 📐 **[`proof-writer`](skills/proof-writer/SKILL.md)** — 社区 skill，严格的 ML/AI 定理证明撰写，含可行性分类和依赖图谱
 - **2026-03-14** — 📱 [飞书集成](#-飞书lark-集成可选)：三种模式（关闭/推送/交互），实验完成、review 出分、checkpoint 审批均可手机收通知
 - **2026-03-13** — 🛑 Human-in-the-loop：所有工作流支持 `AUTO_PROCEED` 检查点，全自动或逐步审批
 - **2026-03-12** — 🔗 [Zotero](#-zotero-集成可选) + [Obsidian](#-obsidian-集成可选) + 本地 PDF + arXiv/Scholar：多源文献检索 + 跨模型新颖性验证
@@ -124,6 +125,7 @@ claude
 | Skill | 🤖 [`idea-discovery-robot`](skills/idea-discovery-robot/SKILL.md) | 机器人 / 具身智能 | 工作流 1 适配版——按 embodiment、benchmark、sim2real 路径和安全约束生成、筛选 idea | 是 |
 | External | 🔬 [Auto-Research-Refine](https://github.com/zjYao36/Auto-Research-Refine) | 通用 | 把模糊 idea 变成可执行研究方案——衔接 `/idea-discovery` 和 `/auto-review-loop`。Claude + GPT-5.4 迭代精炼 | 是 |
 | External | 🛡️ [open-source-hardening-skills](https://github.com/zeyuzhangzyz/open-source-hardening-skills) | DevOps / 开源 | 10 个 skill 流水线，将研究代码加固为生产级开源项目——审计、重构、测试、CI、文档、review。ARIS 研究完成后的下一步 | 是 |
+| Skill | 📐 [`proof-writer`](skills/proof-writer/SKILL.md) | ML 理论 | 严格的定理/引理证明撰写——可行性分类、依赖图谱、诚实的阻塞报告。绝不伪造缺失步骤 | 否 |
 | Docs | 🐾 [OpenClaw 适配指南](docs/OPENCLAW_ADAPTATION.md) | 通用 | 在 [OpenClaw](https://github.com/All-Hands-AI/OpenHands) 中使用 ARIS 工作流方法论——skill 到阶段映射、文件化编排，无需 Claude Code CLI | 否 |
 
 > **⭐ 推荐：[Auto-Research-Refine](https://github.com/zjYao36/Auto-Research-Refine)** — 填补了"研究什么"到"怎么研究"之间的空白。接入 ARIS 流水线：
