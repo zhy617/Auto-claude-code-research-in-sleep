@@ -69,7 +69,7 @@ claude
 
 ## ✨ 功能亮点
 
-- 📊 **19 个可组合 skill** — 自由混搭，或串联为完整流水线（`/idea-discovery`、`/auto-review-loop`、`/paper-writing`、`/research-pipeline`）
+- 📊 **20 个可组合 skill** — 自由混搭，或串联为完整流水线（`/idea-discovery`、`/auto-review-loop`、`/paper-writing`、`/research-pipeline`）
 - 🔍 **文献 & 查新** — 多源论文搜索（**[Zotero](#-zotero-集成可选)** + **[Obsidian](#-obsidian-集成可选)** + **本地 PDF** + arXiv/Scholar）+ 跨模型查新验证
 - 💡 **Idea 发现** — 文献调研 → 头脑风暴 8-12 个 idea → 查新 → GPU pilot 实验 → 排名报告
 - 🔄 **自动 review 循环** — 4 轮自主审稿，一夜从 5/10 提升到 7.5/10，自动跑 20+ 组 GPU 实验
@@ -317,6 +317,7 @@ NARRATIVE_REPORT.md ──► /paper-plan ──► /paper-figure ──► /pap
 | 💡 [`idea-creator`](skills/idea-creator/SKILL.md) | 给定研究方向，自动生成、筛选、排序研究 idea | 是 |
 | 🔬 [`research-review`](skills/research-review/SKILL.md) | 单轮深度评审（外部 LLM，xhigh 推理） | 是 |
 | 🔁 [`auto-review-loop`](skills/auto-review-loop/SKILL.md) | 多轮自动 review→修复→再 review 循环（最多 4 轮） | 是 |
+| 🔁 [`auto-review-loop-llm`](skills/auto-review-loop-llm/SKILL.md) | 同上，但使用任意 OpenAI 兼容 API（DeepSeek、MiniMax、Kimi 等），通过 [`llm-chat`](mcp-servers/llm-chat/) MCP 服务器 | 否（使用 llm-chat MCP） |
 | 📚 [`research-lit`](skills/research-lit/SKILL.md) | 搜索 [Zotero](#-zotero-集成可选) + [Obsidian](#-obsidian-集成可选) + 本地 PDF + [arXiv API](#arxiv-集成) + 网络，分析相关工作、找空白 | 否（可选：Zotero/Obsidian MCP） |
 | 📊 [`analyze-results`](skills/analyze-results/SKILL.md) | 分析实验结果、统计、生成对比表 | 否 |
 | 👀 [`monitor-experiment`](skills/monitor-experiment/SKILL.md) | 监控实验进度、收集结果 | 否 |
@@ -732,7 +733,7 @@ Skills 就是普通的 Markdown 文件，fork 后随意改：
 
 ## 🔀 替代模型组合
 
-没有 Claude / OpenAI API？可以换用其他模型——同样的跨模型架构，不同的提供商。
+没有 Claude / OpenAI API？可以换用其他模型——同样的跨模型架构，不同的提供商。详见 [LLM API 混搭配置指南](docs/LLM_API_MIX_MATCH_GUIDE.md)（含 DeepSeek、Kimi、SiliconFlow 等 8+ 提供商配置）。
 
 | 角色 | 默认 | 方案 A：GLM + GPT | 方案 B：GLM + MiniMax |
 |------|------|-------------------|----------------------|

@@ -69,7 +69,7 @@ See [full setup guide](#%EF%B8%8F-setup) for details and [alternative model comb
 
 ## ✨ Features
 
-- 📊 **19 composable skills** — mix and match, or chain into full pipelines (`/idea-discovery`, `/auto-review-loop`, `/paper-writing`, `/research-pipeline`)
+- 📊 **20 composable skills** — mix and match, or chain into full pipelines (`/idea-discovery`, `/auto-review-loop`, `/paper-writing`, `/research-pipeline`)
 - 🔍 **Literature & novelty** — multi-source paper search (**[Zotero](#-zotero-integration-optional)** + **[Obsidian](#-obsidian-integration-optional)** + **local PDFs** + arXiv/Scholar) + cross-model novelty verification
 - 💡 **Idea discovery** — literature survey → brainstorm 8-12 ideas → novelty check → GPU pilot experiments → ranked report
 - 🔄 **Auto review loop** — 4-round autonomous review, 5/10 → 7.5/10 overnight with 20+ GPU experiments
@@ -372,6 +372,7 @@ After Workflow 3 generates the paper, `/auto-paper-improvement-loop` runs 2 roun
 | 💡 [`idea-creator`](skills/idea-creator/SKILL.md) | Generate and rank research ideas given a broad direction (brainstorm + filter + validate) | Yes |
 | 🔬 [`research-review`](skills/research-review/SKILL.md) | Single-round deep review from external LLM (xhigh reasoning) | Yes |
 | 🔁 [`auto-review-loop`](skills/auto-review-loop/SKILL.md) | Autonomous multi-round review→fix→re-review loop (max 4 rounds) | Yes |
+| 🔁 [`auto-review-loop-llm`](skills/auto-review-loop-llm/SKILL.md) | Same as above, but uses any OpenAI-compatible API via [`llm-chat`](mcp-servers/llm-chat/) MCP server (DeepSeek, MiniMax, Kimi, etc.) | No (uses llm-chat MCP) |
 | 📚 [`research-lit`](skills/research-lit/SKILL.md) | Scan [Zotero](#-zotero-integration-optional) + [Obsidian](#-obsidian-integration-optional) + local PDFs + [arXiv API](#arxiv-integration) + web search, analyze related work, find gaps | No (Optional: Zotero/Obsidian MCP) |
 | 📊 [`analyze-results`](skills/analyze-results/SKILL.md) | Analyze experiment results, compute statistics, generate insights | No |
 | 👀 [`monitor-experiment`](skills/monitor-experiment/SKILL.md) | Monitor running experiments, check progress, collect results | No |
@@ -816,7 +817,7 @@ Override inline: `/research-lit "topic" — paper library: ~/Zotero/storage/`
 
 ## 🔀 Alternative Model Combinations
 
-Don't have Claude / OpenAI API access? You can swap in other models — same cross-model architecture, different providers.
+Don't have Claude / OpenAI API access? You can swap in other models — same cross-model architecture, different providers. See the full [LLM API Mix-Match Guide](docs/LLM_API_MIX_MATCH_GUIDE.md) for 8+ provider configurations (DeepSeek, Kimi, SiliconFlow, etc.).
 
 | Role | Default | Alt A: GLM + GPT | Alt B: GLM + MiniMax |
 |------|---------|-------------------|----------------------|
