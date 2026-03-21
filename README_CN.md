@@ -28,6 +28,7 @@
 
 ## 📢 最近更新
 
+- **2026-03-22** — ![NEW](https://img.shields.io/badge/NEW-red?style=flat-square) 📋 **[模板](templates/)** — 每个工作流都有现成输入模板：[研究简报](templates/RESEARCH_BRIEF_TEMPLATE.md)（工作流 1）、[实验计划](templates/EXPERIMENT_PLAN_TEMPLATE.md)（工作流 1.5）、[研究叙事](templates/NARRATIVE_REPORT_TEMPLATE.md) + [论文大纲](templates/PAPER_PLAN_TEMPLATE.md)（工作流 3）。复制、填写、运行
 - **2026-03-21** — ![NEW](https://img.shields.io/badge/NEW-red?style=flat-square) 🏆 **AAAI 2026 接收——纯 Codex CLI 7/10 分！** ARIS-Codex skills 完成，by [@xinbo820-web](https://github.com/xinbo820-web)。详见[社区实操](#-社区实操--用-aris-完成的论文)
 - **2026-03-20** — ![NEW](https://img.shields.io/badge/NEW-red?style=flat-square) 🏆 **首个社区论文获 8/10 分！** CS 论文全程 ARIS 完成——"empirical findings are stark, well-supported"。恭喜 [@DefanXue](https://github.com/DefanXue) & [@Monglitay](https://github.com/Monglitay)！详见[社区实操](#-社区实操--用-aris-完成的论文)
 - **2026-03-20** — ![NEW](https://img.shields.io/badge/NEW-red?style=flat-square) 🚀 **[Antigravity 适配指南](docs/ANTIGRAVITY_ADAPTATION_CN.md)** — 在 [Google Antigravity](https://antigravity.google/)（Agent-First IDE）中使用 ARIS skills。原生 `SKILL.md` 支持，双模型（Claude Opus 4.6 Thinking / Gemini 3.1 Pro），MCP 配置，[英文](docs/ANTIGRAVITY_ADAPTATION.md) + 中文指南
