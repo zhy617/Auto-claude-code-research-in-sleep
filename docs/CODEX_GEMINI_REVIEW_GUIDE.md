@@ -58,7 +58,7 @@ The bridge auto-loads `~/.gemini/.env` if present.
 ## Access Notes
 
 - Google AI Studio / Gemini API has a free tier in eligible countries; this does **not** require a Gemini Advanced / Google One AI Premium subscription.
-- Free-tier model availability and rate limits change over time, so do not treat any single quota number as permanent.
+- Free-tier model availability and rate limits change over time, so do not treat any single quota number or older model example as permanent.
 - On the free tier, prompts and responses may be used to improve Google's products; do not position this path as suitable for sensitive data unless the user has reviewed the current official terms.
 - Official references:
   - API key / AI Studio entry: <https://aistudio.google.com/apikey>
@@ -120,6 +120,7 @@ What passed:
 What we observed:
 
 - Gemini free-tier access is practical for this reviewer path, but bursty test loops can still trigger temporary `429` rate-limit responses
+- rate-limit behavior is model-dependent; current API model surfaces should be checked in AI Studio / `ListModels`, not inferred from older quota tables
 - those `429` responses behaved like short-window burst limits, not a sign that the integration itself was broken
 - long synchronous reviewer calls can still hit host-side MCP tool timeouts, so the async `review_start` / `review_reply_start` + `review_status` flow remains the recommended default for long prompts
 
@@ -146,6 +147,67 @@ The overlay replaces the predefined reviewer-aware Codex skills:
 - `auto-paper-improvement-loop`
 
 Everything else still comes from the upstream `skills/skills-codex/` package.
+
+## Core 8 vs Runtime 15
+
+There are two equally correct ways to describe the scope of this path:
+
+- **Core 8**: the direct one-to-one reviewer overlay set that aligns with the existing Claude-review path
+- **Runtime 15**: the full reviewer-aware Codex skill surface that is routed to Gemini in the current installed skill set
+
+The **core 8** are:
+
+- `research-review`
+- `novelty-check`
+- `research-refine`
+- `auto-review-loop`
+- `paper-plan`
+- `paper-figure`
+- `paper-write`
+- `auto-paper-improvement-loop`
+
+These are the skills that most directly mirror the earlier Claude-review overlay structure and reviewer contract.
+
+The additional **7** reviewer-aware skills routed to Gemini are:
+
+- `idea-creator`
+- `idea-discovery`
+- `idea-discovery-robot`
+- `grant-proposal`
+- `paper-writing`
+- `paper-slides`
+- `paper-poster`
+
+So the practical summary is:
+
+- the **core mechanism** still tracks the same 8-skill overlay pattern as the Claude route
+- the **current runtime reviewer surface** is broader, reaching 15 skills in total
+
+This is why the diff is larger without changing the underlying reviewer contract shape.
+
+## Direct Consumers vs Wrappers
+
+Within those 15 skills, there are two categories:
+
+- **12 direct consumers** that call `mcp__gemini-review__review_start` / `review_reply_start` / `review_status` themselves:
+  - `research-review`
+  - `novelty-check`
+  - `research-refine`
+  - `auto-review-loop`
+  - `paper-plan`
+  - `paper-figure`
+  - `paper-write`
+  - `auto-paper-improvement-loop`
+  - `idea-creator`
+  - `grant-proposal`
+  - `paper-slides`
+  - `paper-poster`
+- **3 wrappers** that mainly orchestrate downstream reviewer-aware sub-skills and pass `REVIEWER_MODEL=gemini-review` through:
+  - `idea-discovery`
+  - `idea-discovery-robot`
+  - `paper-writing`
+
+This matters for validation: you do not need to fully complete all 15 workflows to validate the reviewer transport. A combination of full structural checks, bridge runtime checks, and representative direct-consumer / wrapper smoke tests is enough to validate the PR-level integration logic.
 
 ## Async reviewer flow
 

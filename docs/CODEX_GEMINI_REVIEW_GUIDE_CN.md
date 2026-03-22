@@ -58,7 +58,7 @@ chmod 600 ~/.gemini/.env
 ## 接入边界说明
 
 - Google AI Studio / Gemini API 在支持地区提供免费层；这**不要求**你先订阅 Gemini Advanced / Google One AI Premium。
-- 免费层可用模型、速率限制和配额会变化，不应把某个固定额度写成长期承诺。
+- 免费层可用模型、速率限制和配额会变化，不应把某个固定额度或旧模型示例写成长期承诺。
 - 免费层下的 prompt / response 处理条款与付费层不同；如果涉及敏感数据，必须先核对官方当前条款。
 - 官方入口与定价说明：
   - API key / AI Studio：<https://aistudio.google.com/apikey>
@@ -121,6 +121,7 @@ codex -C /path/to/your/project
 测试中的实际观察：
 
 - Gemini 免费层对这条 reviewer 路径是可用的，但如果在很短时间内集中压测，仍然可能出现临时 `429`
+- 速率限制表现和具体模型有关；当前 API 模型面应以 AI Studio / `ListModels` 为准，而不是沿用旧配额表里的模型示例
 - 这类 `429` 更像是短时间 burst limit，而不是集成本身失效
 - 对超长 prompt，宿主侧 MCP tool timeout 仍可能先于同步调用返回，所以长审稿默认仍推荐 `review_start` / `review_reply_start` + `review_status`
 
@@ -147,6 +148,67 @@ codex -C /path/to/your/project
 - `auto-paper-improvement-loop`
 
 其它能力仍然来自上游 `skills/skills-codex/`。
+
+## 核心 8 个 vs 运行态 15 个
+
+这条路径有两种都成立的描述方式：
+
+- **核心 8 个**：和现有 Claude-review 路径一一对齐的 reviewer overlay 核心集合
+- **运行态 15 个**：当前安装后的 Codex skill 集里，实际切到 Gemini reviewer 的完整 reviewer-aware 技能面
+
+其中 **核心 8 个** 是：
+
+- `research-review`
+- `novelty-check`
+- `research-refine`
+- `auto-review-loop`
+- `paper-plan`
+- `paper-figure`
+- `paper-write`
+- `auto-paper-improvement-loop`
+
+这 8 个最直接对应早先 Claude-review overlay 的组织方式和 reviewer 契约。
+
+另外扩展进去的 **7 个** reviewer-aware 技能是：
+
+- `idea-creator`
+- `idea-discovery`
+- `idea-discovery-robot`
+- `grant-proposal`
+- `paper-writing`
+- `paper-slides`
+- `paper-poster`
+
+所以更准确的理解是：
+
+- **核心机制** 仍然沿用和 Claude 路径相同的 8-skill overlay 形状
+- **运行态 reviewer 覆盖面** 则已经扩展到 15 个 skill
+
+这也解释了为什么 diff 更大，但并不意味着 reviewer 契约本身被改乱了。
+
+## 直接消费者 vs wrapper
+
+这 15 个 skill 里又可以分成两类：
+
+- **12 个直接消费者**：自己会直接调用 `mcp__gemini-review__review_start` / `review_reply_start` / `review_status`
+  - `research-review`
+  - `novelty-check`
+  - `research-refine`
+  - `auto-review-loop`
+  - `paper-plan`
+  - `paper-figure`
+  - `paper-write`
+  - `auto-paper-improvement-loop`
+  - `idea-creator`
+  - `grant-proposal`
+  - `paper-slides`
+  - `paper-poster`
+- **3 个 wrapper**：主要负责串联下游 reviewer-aware 子 skill，并向下传递 `REVIEWER_MODEL=gemini-review`
+  - `idea-discovery`
+  - `idea-discovery-robot`
+  - `paper-writing`
+
+这层分类对验收很重要：不需要把 15 条工作流都完整跑到底，才能证明 reviewer transport 是通的。对于 PR 验收，更合理的做法是：全量结构检查 + bridge 运行时验证 + 少量直接消费者 / wrapper 的代表性 smoke test 组合验证。
 
 ## 异步 reviewer 流程
 
