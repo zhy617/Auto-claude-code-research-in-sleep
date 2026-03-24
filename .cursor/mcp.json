@@ -1,0 +1,8 @@
+{
+    "mcpServers": {
+      "obsidian-vault": {
+        "command": "npx",
+        "args": ["@bitbonsai/mcpvault@latest", "C:\\Users\\13183\\OneDrive\\Apps\\Obsidian\\EfficientAI"]
+      }
+    }
+  }
