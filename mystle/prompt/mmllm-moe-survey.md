@@ -1,9 +1,8 @@
-```
+请严格按下面的 pipeline 一次性执行，不要中途停下询问我；如果需要写文件，就直接在当前工作区创建。
 @skills/research-lit/SKILL.md
 @skills/idea-creator/SKILL.md
 @skills/novelty-check/SKILL.md
 @skills/research-review/SKILL.md
-@mystle/first_attempt_lit.md
 
 你现在是我的“研究选题代理”，请在一个会话内连续执行完整 idea-only pipeline，禁止在中间停下来等我确认。
 
@@ -15,10 +14,10 @@
 1) 只做 idea 与论文方向判断，不做任何实验执行
 2) 禁用 mcp__codex__* / mcp__llm-chat__*；允许使用 mcp__obsidian-vault__* 仅用于读取/写入我的 Obsidian 笔记
 3) 不需要 GPU、部署、训练脚本
-4) 优先利用我已有材料（尤其 @mystle/first_attempt_lit.md）
+4) 优先利用我已有材料（尤其是我 Obsidian 里面的 90_Project 里的结果）
 5) 不要中途提问，不要等待确认；信息不足时做合理假设并继续
 6) 每阶段都写文件，保证可恢复和可复用
-7) 每阶段产出除本地文件外，还需同步一份到 Obsidian：Research/IdeaPipeline/{{date}}/
+7) 每阶段产出除本地文件外，还需同步一份到 Obsidian：93_Research_Records/IdeaPipeline/{{date}}
 
 ## 执行阶段（必须按顺序）
 ### Phase 1: Literature Landscape
@@ -65,4 +64,3 @@
   - 产出文件清单
   - 主线与备选 idea 名称
   - 一段简短结论（<=120字）
-```
