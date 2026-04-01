@@ -124,6 +124,7 @@ Two outputs: `PASTE_READY.txt` (exact char count, paste to venue) + `REBUTTAL_DR
 ```bash
 # 1. Install skills
 git clone https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep.git
+mkdir -p ~/.claude/skills/    # create if it doesn't exist (new Claude Code versions)
 cp -r Auto-claude-code-research-in-sleep/skills/* ~/.claude/skills/
 
 # 2. Set up Codex MCP (for review skills)
